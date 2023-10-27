@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import auth from "./routes/AuthentificationRoute.js";
 import play from "./routes/player.js";
 import serv from "./routes/serveritems.js";
+import User from "./model/User.js";
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,7 +23,8 @@ export const connect = async () => {
 };
 
 app.get("/", async (req, res, next) => {
-  res.status(200).json({ message: "server works" });
+  const users = await User.find();
+  res.status(200).json(users);
 });
 app.use(auth);
 app.use(play);
