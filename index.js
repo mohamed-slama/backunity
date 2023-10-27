@@ -14,13 +14,20 @@ mongoose.set("strictQuery", true);
 
 //setting the database
 dotenv.config();
-export const connect = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_CONNECT_URI);
-  } catch (error) {
-    throw error;
-  }
-};
+
+const mongodbUri =
+  process.env.MONGO_CONNECT_URI ||
+  "mongodb+srv://mohamedslama1:OUzdcNfgcCvb3byt@cluster0.stl4f2f.mongodb.net/Logingame?retryWrites=true&w=majority";
+
+mongoose
+  .connect(mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
+
 
 app.get("/", async (req, res, next) => {
   const users = await User.find();
@@ -31,6 +38,6 @@ app.use(play);
 app.use(serv);
 
 app.listen(13756, () => {
-  connect();
+
   console.log("listening on " + 13756);
 });
