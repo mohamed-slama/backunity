@@ -21,7 +21,9 @@ export const connect = async () => {
   }
 };
 
-app.use("/", "test valide");
+app.get("/", async (req, res, next) => {
+  res.status(200).json({ message: "server works" });
+});
 app.use(auth);
 app.use(play);
 app.use(serv);
