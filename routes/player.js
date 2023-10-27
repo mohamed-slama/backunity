@@ -13,6 +13,7 @@ app.post('/account/player',
     try {
       const savedplayer= await newplayer.save();
       res.status(200).json(savedplayer);
+      
     } catch (err) {
       next(err);
     }
