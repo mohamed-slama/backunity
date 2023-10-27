@@ -16,7 +16,7 @@ mongoose.set("strictQuery", true);
 dotenv.config();
 export const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO);
+    await mongoose.connect(process.env.MONGO_CONNECT_URI);
   } catch (error) {
     throw error;
   }
